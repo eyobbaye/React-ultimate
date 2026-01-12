@@ -142,3 +142,40 @@ function getBooks() {
 function getBook(id) {
   return data.find((d) => d.id === id);
 }
+// 1, Destructuring: A JS expression that make it possible to unpack values from arrays or properties from objects into distinct variables.
+// Destructure to get the title and author of each book
+
+const books = getBooks();
+books.forEach((book)=>{
+    const  {title, author}= book;
+    console.log(`Tittle:${title}, Author: ${ author}`)
+})
+// Destructure to get the primary and secondary genres of the book with id 2
+const [primaryGenre, secondaryGenre]= getBook(2).genres;
+console.log(primaryGenre, secondaryGenre)
+// Destructure to get the Spanish and Chinese translations of each book
+books.forEach((book)=>{
+    const {spanish, chinese} = book.translations;
+    console.log(`Spanish: ${spanish}, Chinese: ${chinese}`)
+})
+
+// 1.1, RestSpread Operator: Gather the remaining elements into an array or object.
+//  Destructure to get all genres except the primary one for each book
+books.forEach((book)=>{
+    const [primaryGenre, ...otherGenres]= book.genres;
+    console.log(`${otherGenres}`)
+})
+//  Create a new array of genres for the book with id 1, adding "Drama" as an additional genre
+const {genres} = getBook(1);    
+const newGenres = [...genres,"Drama"]
+newGenres;
+
+// Create a new objectfor the book with id 3, changing the number of pages to 700
+const book5 = getBook(5);
+const updatedBook5 = {...book5, pages:700};
+updatedBook5
+
+//  Adding a new array of moviePublicationDate to the book with id 4
+const book4 =getBook(4);
+const updatedBook4 = {...book4, moviePublicationDate:'2026-12-25'}
+updatedBook4
