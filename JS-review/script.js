@@ -176,6 +176,25 @@ const updatedBook5 = {...book5, pages:700};
 updatedBook5
 
 //  Adding a new array of moviePublicationDate to the book with id 4
-const book4 =getBook(4);
+const book4 =getBook(2);
 const updatedBook4 = {...book4, moviePublicationDate:'2026-12-25'}
 updatedBook4
+
+// 1.3 Terinary Opretator: A conditional operator that provides a shorthand way to express conditional statements.
+const hasMovieAdaptation = books.map((book)=>{
+    return book.hasMovieAdaptation ? `${book.title} has a movie adaptaition`: `${book.title} has NO a movie adaptation`;
+})
+hasMovieAdaptation
+// No of movie that has a movie adaptation
+
+const countMovieAdaptations = books.reduce((count, book)=>{
+    return book.hasMovieAdaptation ? count + 1: count;
+}, 0);
+countMovieAdaptations
+
+// 1,4 Arrow Functions: A concise syntax for writing functions using the "=>" syntax.
+// Use arrow functions to create a function that returns the titles of all books
+const getBookTitles = books.map((book)=> book.title);
+getBookTitles
+// 
+
