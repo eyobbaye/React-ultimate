@@ -227,3 +227,59 @@ const getSpanishTranslation1=(book1)=> book1.translations.spanish ?? "No Spanish
 console.log(getTotalReviewCount(book1))
 */
 
+// 2, Array Methods Practice 
+// 2.1, .Map(): it loop through each element in an array and appply a function to each element, and returning a new array
+const x = [1,2,3,4,5].map(el=> el*2);
+console.log(x)
+
+const books = getBooks();
+books
+
+const bookTitle=books.map((book)=>book.title);
+console.log(bookTitle);
+// Create a new array  which contains the title and author of each book.
+const bookTitleAndAuthor = books.map((book)=> ` Title: ${book.title}, By ${book.author}`)
+console.log(bookTitleAndAuthor)
+
+// 2.2 Filter(): It creates a new array with all e/l that pass the filter method test.
+const longPageBooks = books.filter((book)=> book.pages >= 1000).filter((book)=> book.title.startsWith("The"));
+console.log(longPageBooks);
+// Create a new array that contains only the books title that have more than 500 pages.
+const bookOver500Pages= books.filter((book)=> book.pages > 500).map((book)=> book.title);
+bookOver500Pages
+// Create a new array that contains only the books title that have geners= "Action"
+const actionGenreBooks = books.filter((book)=> book.genres.includes("adventure")).map((book)=> book.title);
+actionGenreBooks;
+
+// 2.3 Reduce(): it use the reducer function to each element of an array and reduce it to the a single calue.
+// give us a single value as result.
+// 
+const numbers = [1,2,3,4,5]
+const totalSum = numbers.reduce((acc, num)=> acc + num,0);
+totalSum;
+// totla numbers of pages of all books.
+const totalPages = books.reduce((acc,book)=> acc + book.pages,0);
+totalPages;
+console.log(books.map((book)=> book.pages));
+//  Get the book with the highest number of pages.
+const bookWithMostPAges= books.reduce((maxBook, currentBook)=> {
+  return currentBook.pages > maxBook.pages ? currentBook: maxBook;
+})
+bookWithMostPAges;
+// 2.4 Sort(): sorts the elements of an array in place and returns the sorted array.
+const sortedBooksByPages = books.sort((a,b)=> a.pages - b.pages);
+console.log(sortedBooksByPages)
+
+const numbers1 = [5,9,3,2,1];
+console.log(numbers1.slice().sort((a,b)=> a - b))
+numbers1
+// Sort books by publication date
+const sortedBooksByPublicationDate = books.slice().sort((a,b)=> new Date(a.publicationDate) - new Date(b.publicationDate)).map((book)=> book.title);
+sortedBooksByPublicationDate
+const booksWithPublicationDates = books.map((book)=> `${book.title}: ${book.publicationDate}`);
+booksWithPublicationDates;
+
+
+
+
+
