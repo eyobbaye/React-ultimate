@@ -142,6 +142,7 @@ function getBooks() {
 function getBook(id) {
   return data.find((d) => d.id === id);
 }
+/*
 // 1, Destructuring: A JS expression that make it possible to unpack values from arrays or properties from objects into distinct variables.
 // Destructure to get the title and author of each book
 
@@ -196,5 +197,33 @@ countMovieAdaptations
 // Use arrow functions to create a function that returns the titles of all books
 const getBookTitles = books.map((book)=> book.title);
 getBookTitles
-// 
+
+// 1,5 Short circuting`: A technique that uses logical operators to conditionally execute expressions based on the truthiness of values.
+//  movie adaptation 
+const book1 = getBook(3);
+console.log(book1.hasMovieAdaptation && "This book has movie adaptation" || "No movie adaptation available");
+// Review count
+const reviewCount= book1.reviews.goodreads.reviewsCount || "No reviews available";
+reviewCount
+
+// 1.6 Optional  Chaining: A synax to safely access nested onjects properties, even if the proper is  undefined or null
+// When ever we are unshure that the value is exist or not, we can use optional chainingto avoid errors.
+// Get the number of revies for the book with ID 3 from librarything, using oprional chaining.
+function getTotalReviewCount (book1){
+const goodreads = book1.reviews.goodreads.reviewsCount
+const librarything = book1.reviews.librarything?.reviewsCount ?? + 0
+librarything
+return goodreads + librarything;
+}
+console.log(getTotalReviewCount(book1));
+
+function getSpanishTranslation(book1){
+  return book1.translations.spanish ?? "No Spanish";
+
+}
+console.log(getSpanishTranslation(book1)); 
+
+const getSpanishTranslation1=(book1)=> book1.translations.spanish ?? "No Spanish";
+console.log(getTotalReviewCount(book1))
+*/
 
