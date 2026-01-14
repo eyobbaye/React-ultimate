@@ -232,7 +232,7 @@ console.log(getTotalReviewCount(book1))
 const x = [1,2,3,4,5].map(el=> el*2);
 console.log(x)
 
-const books = getBooks();
+const books = getBooks(1);
 books
 
 const bookTitle=books.map((book)=>book.title);
@@ -279,7 +279,31 @@ sortedBooksByPublicationDate
 const booksWithPublicationDates = books.map((book)=> `${book.title}: ${book.publicationDate}`);
 booksWithPublicationDates;
 
+// working immutable Arrays: Working with an existing array without changing it.
 
+// 1) Adding a new book object to the data array
+          //  We use the Rested Opreator to add anew array.
+          
+const newBook = {
+  id: 6,
+  title: "The Hobbit",
+  author: "J. R. R. Tokien"
+}
+const booksAfterAdded = [...books, newBook];
+booksAfterAdded
 
+// 2) Delete or Remove an array obect from the data array.
+  //   We use the filter method.
+const booksAfterDeletion = books.filter((book)=> book.id !== 4);
+booksAfterDeletion
 
-
+// 3) Update a book object in the data array.
+    // Update id === 1 to have the pages: 1;
+    // We use the map() method to delete the array and use spread opreator to update the object.
+const booksAfterUpdated = books.map((book)=> 
+ book.id === 1 ? {...book, pages: 1} : book
+);
+booksAfterUpdated;
+    //  original array remains unchanged.
+    books;
+    
