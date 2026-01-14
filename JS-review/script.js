@@ -1,3 +1,5 @@
+// require ("dotenv").config()";
+
 const data = [
   {
     id: 1,
@@ -227,6 +229,7 @@ const getSpanishTranslation1=(book1)=> book1.translations.spanish ?? "No Spanish
 console.log(getTotalReviewCount(book1))
 */
 
+/*
 // 2, Array Methods Practice 
 // 2.1, .Map(): it loop through each element in an array and appply a function to each element, and returning a new array
 const x = [1,2,3,4,5].map(el=> el*2);
@@ -306,4 +309,29 @@ const booksAfterUpdated = books.map((book)=>
 booksAfterUpdated;
     //  original array remains unchanged.
     books;
-    
+    */
+
+    // Async/Await Promisees Practice
+    // Async Promises
+    // fetch("https://jsonplaceholder.typicode.com/posts/1")
+    // .then((res)=> res.json())
+    // .then ((data)=> console.log(data))
+    // console.log("Eyob")
+
+    // Aync/Await
+
+    async function getPosts(){
+     const res= await fetch("https://jsonplaceholder.typicode.com/posts/1")
+     const data =  await res.json();
+      console.log(data)
+    }
+    getPosts()
+    console.log("Eyob")
+
+    async function getWather(){
+      const apiKey = "https://api.openweathermap.org/data/2.5/weather?q=addis ababa&appid=b65e6b6b6a391b42d889fdb536260d56";
+      const res = await fetch(apiKey);
+      const data = await res.json();
+      console.log(data)
+    }
+    getWather()
