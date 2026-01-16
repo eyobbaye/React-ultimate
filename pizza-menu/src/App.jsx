@@ -5,7 +5,7 @@ import "./App.css";
 function App() {
   return (
     <>
-      <div className="container">
+      <div className="">
         <Header />
         <Menu />
         <Footer />
@@ -18,17 +18,30 @@ function App() {
 // Header
 function Header() {
   return (
-    <header className="header">
-      <h1>Fast React Pizza Co.</h1>;
+    <header className="header footer">
+      <h1>Fast React Pizza Co.</h1>
     </header>
   );
 }
 // Menu
 function Menu() {
+  const pizzas = pizzaData;
+  // Conditional Rendering
+  //  const pizzas = []
+  const numPizzas = pizzas.length;
+  
   return (
     <main className="menu">
       <h2>Our Menu</h2>
-      <PizzaMenu
+      {numPizzas > 0 && (
+        <ul className="pizzas">
+          {pizzas.map((pizza) => (
+            <PizzaMenu key={pizza.name} pizzaObj={pizza} />
+          ))}
+        </ul>
+      )}
+      {/* ) */}
+      {/* <PizzaMenu
         name={pizzaData[0].name}
         ingredients={pizzaData[0].ingredients}
         price={pizzaData[0].price}
@@ -39,7 +52,7 @@ function Menu() {
         ingredients={pizzaData[1].ingredients}
         price={pizzaData[1].price}
         photoName={pizzaData[1].photoName}
-      />
+      /> */}
     </main>
   );
 }
@@ -47,13 +60,13 @@ function PizzaMenu(props) {
   console.log(props);
   return (
     <>
-      <div className="pizza">
+      <li className="pizza">
         {/* Using Props */}
-        <img src={props.photoName} alt={props.name} />
-        <h3>{props.name}</h3>
+        <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
         <div className="">
-          <p>Ingredients: {props.ingredients}</p>
-          <p>Price: ${props.price + 3} </p>
+          <h3>{props.pizzaObj.name}</h3>
+          <p>Ingredients: {props.pizzaObj.ingredients}</p>
+          <p>Price: ${props.pizzaObj.price + 3} </p>
         </div>
 
         {/* .map() method */}
@@ -74,7 +87,7 @@ function PizzaMenu(props) {
           {pizzaData[0].name} - ${pizzaData[0].price}
         </h2>
         <p>Ingredients: {pizzaData[0].ingredients}</p> */}
-      </div>
+      </li>
     </>
   );
 }
@@ -88,9 +101,10 @@ function Footer() {
   if (isOpen) {
     return (
       <footer className="footer">
-        <div>
+        <div className="order">
           <p> {new Date().toLocaleTimeString()}. We're Currently Open!</p>
         </div>
+        <button className="btn">Order</button>
       </footer>
     );
   } else {

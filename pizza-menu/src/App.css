@@ -5,6 +5,16 @@
   padding: 0;
   box-sizing: border-box;
 }
+:root {
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
 html {
   font-size: 62.5%;
@@ -12,9 +22,9 @@ html {
 
 body {
   font-family: "Roboto Mono", sans-serif;
-  color: #252525;
+  /* color: #252525; */
   font-weight: 400;
-  background-color: #f7f2e9;
+  /* background-color: #f7f2e9; */
   border-bottom: 1.6rem solid #edc84b;
   min-height: 100vh;
   padding: 3.2rem;
@@ -45,6 +55,7 @@ body {
   text-transform: uppercase;
   text-align: center;
   font-size: 5.2rem;
+  margin-top: -8rem;
   font-weight: 300;
   letter-spacing: 3px;
   position: relative;
@@ -153,6 +164,9 @@ body {
 
 .footer {
   font-size: 1.4rem;
+  margin-top:8rem ;
+  text-align: center;
+  align-items: center;
 }
 
 .order {
