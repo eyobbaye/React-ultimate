@@ -33,13 +33,15 @@ function Menu() {
   return (
     <main className="menu">
       <h2>Our Menu</h2>
-      {numPizzas > 0 && (
+      {numPizzas > 0 ? (
         <ul className="pizzas">
           {pizzas.map((pizza) => (
             <PizzaMenu key={pizza.name} pizzaObj={pizza} />
           ))}
         </ul>
-      )}
+      ): (
+        <p>We are still woking on our menu. Please come back later</p>
+      )} 
       {/* ) */}
       {/* <PizzaMenu
         name={pizzaData[0].name}
@@ -65,7 +67,7 @@ function PizzaMenu({pizzaObj}) {
         <div>
           <h3>{pizzaObj.name}</h3>
           <p>Ingredients: {pizzaObj.ingredients}</p>
-          <p>Price: {pizzaObj.price}</p>
+          <p>Price: ${pizzaObj.price}</p>
           <p>Sold Out {pizzaObj.soldOut}</p>
         </div>
       </li>
