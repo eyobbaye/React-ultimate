@@ -29,7 +29,7 @@ function Menu() {
   // Conditional Rendering
   //  const pizzas = []
   const numPizzas = pizzas.length;
-  
+
   return (
     <main className="menu">
       <h2>Our Menu</h2>
@@ -56,17 +56,30 @@ function Menu() {
     </main>
   );
 }
-function PizzaMenu(props) {
-  console.log(props);
+function PizzaMenu({pizzaObj}) {
+  console.log(pizzaObj);
+  if (pizzaObj.soldOut) {
+    return (
+      <li className="pizza sold-out">
+        <img src={pizzaObj.photoName} alt={pizzaObj.name} />
+        <div>
+          <h3>{pizzaObj.name}</h3>
+          <p>Ingredients: {pizzaObj.ingredients}</p>
+          <p>Price: {pizzaObj.price}</p>
+          <p>Sold Out {pizzaObj.soldOut}</p>
+        </div>
+      </li>
+    );
+  }
   return (
     <>
       <li className="pizza">
         {/* Using Props */}
-        <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
+        <img src={pizzaObj.photoName} alt={pizzaObj.name} />
         <div className="">
-          <h3>{props.pizzaObj.name}</h3>
-          <p>Ingredients: {props.pizzaObj.ingredients}</p>
-          <p>Price: ${props.pizzaObj.price + 3} </p>
+          <h3>{pizzaObj.name}</h3>
+          <p>Ingredients: {pizzaObj.ingredients}</p>
+          <p>Price: ${pizzaObj.price + 3} </p>
         </div>
 
         {/* .map() method */}
