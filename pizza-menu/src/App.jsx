@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import pizzaData from "./data.js";
 import "./App.css";
 
@@ -9,6 +9,7 @@ function App() {
         <Header />
         <Menu />
         <Footer />
+        {/* <Clock /> */}
       </div>
     </>
   );
@@ -39,9 +40,9 @@ function Menu() {
             <PizzaMenu key={pizza.name} pizzaObj={pizza} />
           ))}
         </ul>
-      ): (
-        <p>We are still woking on our menu. Please come back later</p>
-      )} 
+      ) : (
+        <p>We are still working on our menu. Please come back later</p>
+      )}
       {/* ) */}
       {/* <PizzaMenu
         name={pizzaData[0].name}
@@ -58,7 +59,7 @@ function Menu() {
     </main>
   );
 }
-function PizzaMenu({pizzaObj}) {
+function PizzaMenu({ pizzaObj }) {
   console.log(pizzaObj);
   // conditional rendering .soldOut
   // if (pizzaObj.soldOut) {
@@ -74,6 +75,7 @@ function PizzaMenu({pizzaObj}) {
   //     </li>
   //   );
   // }
+
   return (
     <>
       <li className={`pizza ${pizzaObj.soldOut ? "sold-out" : "pizza"}`}>
@@ -107,10 +109,29 @@ function PizzaMenu({pizzaObj}) {
     </>
   );
 }
+
+// Clock Component
+function Clock() {
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  useEffect(() => {
+    setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+  }, []);
+  const formatedTime = currentTime.toLocaleTimeString();
+
+  return (
+    <div>
+      <p>{formatedTime}</p>
+    </div>
+  );
+}
+
 // Footer
 function Footer() {
   const hour = new Date().getHours();
-  const openHour = 6;
+  const openHour =6;
   const closeHour = 17;
   const isOpen = hour >= openHour && hour <= closeHour;
 
@@ -118,7 +139,10 @@ function Footer() {
     return (
       <footer className="footer">
         <div className="order">
-          <p> {new Date().toLocaleTimeString()}. We're Currently Open!</p>
+          {/* <p> {new Date().toLocaleTimeString()}. We're Currently Open!</p> */}
+          <p>
+            <Clock /> . We're Currently Open!
+          </p>
         </div>
         <button className="btn">Order</button>
       </footer>
@@ -127,7 +151,10 @@ function Footer() {
     return (
       <footer className="footer">
         <div>
-          <p>{new Date().toLocaleTimeString()}. Sorry We're closed!</p>
+          {/* <p>{new Date().toLocaleTimeString()}. Sorry We're closed!</p> */}
+          <p>
+            <Clock /> Sorry We're closed!
+          </p>
         </div>
       </footer>
     );
