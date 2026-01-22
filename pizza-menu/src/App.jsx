@@ -60,28 +60,29 @@ function Menu() {
 }
 function PizzaMenu({pizzaObj}) {
   console.log(pizzaObj);
-  if (pizzaObj.soldOut) {
-    return (
-      <li className="pizza sold-out">
-        <img src={pizzaObj.photoName} alt={pizzaObj.name} />
-        <div>
-          <h3>{pizzaObj.name}</h3>
-          <p>Ingredients: {pizzaObj.ingredients}</p>
-          <p>Price: ${pizzaObj.price}</p>
-          <p>Sold Out {pizzaObj.soldOut}</p>
-        </div>
-      </li>
-    );
-  }
+  // conditional rendering .soldOut
+  // if (pizzaObj.soldOut) {
+  //   return (
+  //     <li className="pizza sold-out">
+  //       <img src={pizzaObj.photoName} alt={pizzaObj.name} />
+  //       <div>
+  //         <h3>{pizzaObj.name}</h3>
+  //         <p>Ingredients: {pizzaObj.ingredients}</p>
+  //         <p>Price: ${pizzaObj.price}</p>
+  //         <p>Sold Out {pizzaObj.soldOut}</p>
+  //       </div>
+  //     </li>
+  //   );
+  // }
   return (
     <>
-      <li className="pizza">
+      <li className={`pizza ${pizzaObj.soldOut ? "sold-out" : "pizza"}`}>
         {/* Using Props */}
         <img src={pizzaObj.photoName} alt={pizzaObj.name} />
         <div className="">
           <h3>{pizzaObj.name}</h3>
           <p>Ingredients: {pizzaObj.ingredients}</p>
-          <p>Price: ${pizzaObj.price + 3} </p>
+          <p>{pizzaObj.soldOut ? "SOLD OUT" : pizzaObj.price}</p>
         </div>
 
         {/* .map() method */}
