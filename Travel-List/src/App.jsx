@@ -84,8 +84,19 @@ function Packing({ items, setItems }) {
 }
 
 function Item({ item, setItems }) {
+  const handleCheckboxClick = (id, checked) => {
+    setItems((prev) =>
+      prev.map((item) => (item.id === id ? { ...item, packed: checked } : item)),
+    );
+  };
+
   return (
     <li style={item.packed ? { textDecoration: "line-through" } : {}}>
+      <input
+        type="checkbox"
+        checked={item.packed}
+        onChange={(e)=>handleCheckboxClick(item.id, e.target.checked)}
+      />
       <span>
         {item.id}, {item.quantity} {item.description}
       </span>
