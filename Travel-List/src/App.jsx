@@ -8,9 +8,9 @@ import "./App.css";
 // ];
 
 function App() {
-  const [items, setItems] = useState([]);
-  const itemCount = items.length;
-  console.log(itemCount);
+  const [items, setItems] = useState([]);//Lift up the state so we can share items data though the component
+  // const itemCount = items.length;
+  // console.log(itemCount);
 
   return (
     <>
@@ -25,6 +25,7 @@ function App() {
 function Logo() {
   return <h1>🌴 Far Away 💼</h1>;
 }
+// pass the setState in to the form as props: setItems
 function Form({ setItems }) {
   // State variavble fot the added items
   // const [submitedValue, setSubmitedValue] = useState("");
@@ -37,16 +38,19 @@ function Form({ setItems }) {
     // prevent the page reload
     e.preventDefault();
     const newItem = { description, quantity, packed: false, id: nextId };
-    console.log(newItem);
+    // console.log(newItem);
 
     if (!description) return;
     // set the input fields to the deafualt value
     setDescription("");
     setQuantity(1);
-    // Add items using rested operation method.
+    // Add items using spread operation method.
     setItems((prevItems) => [...prevItems, newItem]);
     setNextId((n) => n + 1);
   };
+  
+    
+  
   return (
     <form className="add-form" onSubmit={handleSubmit}>
       <h3> What do you need for your 😍 trip?</h3>
@@ -79,6 +83,7 @@ function Packing({ items, setItems }) {
           <Item key={item.id} item={item} setItems={setItems} /> // item Prop.
         ))}
       </ul>
+      <button onClick={()=>window.confirm("You shure?")? setItems([]): items }>Clear List</button>
     </div>
   );
 }
@@ -86,6 +91,7 @@ function Packing({ items, setItems }) {
 function Item({ item, setItems }) {
   const handleCheckboxClick = (id, checked) => {
     setItems((prev) =>
+      // use Spread opereation method to update the packed state.
       prev.map((item) => (item.id === id ? { ...item, packed: checked } : item)),
     );
   };
@@ -110,7 +116,7 @@ function Item({ item, setItems }) {
   );
 }
 function Stats({ items }) {
-  const total = items.length;
+  const total = items.length;// drived state
   const packed = (items || []).filter((it) => it.packed).length;
   const percent = total ? Math.round((packed / total) * 100) : 0;
   return (
