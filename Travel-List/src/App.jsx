@@ -6,11 +6,23 @@ import "./App.css";
 //   { id: 2, description: "Socks", quantity: 12, packed: false },
 //   { id: 3, description: "Charger", quantity: 2, packed: true },
 // ];
+const faqs = [
+  {
+    title: "Where are these chairs assembled?",
+    text: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium, quaerat temporibus quas dolore provident nisi ut aliquid ratione beatae sequi aspernatur veniam repellendus.",
+  },
+  {
+    title: "How long do I have to return my chair?",
+    text: "Pariatur recusandae dignissimos fuga voluptas unde optio nesciunt commodi beatae, explicabo natus.",
+  },
+  {
+    title: "Do you ship to countries outside the EU?",
+    text: "Excepturi velit laborum, perspiciatis nemo perferendis reiciendis aliquam possimus dolor sed! Dolore laborum ducimus veritatis facere molestias!",
+  },
+];
 
 function App() {
   const [items, setItems] = useState([]);//Lift up the state so we can share items data though the component
-  // const itemCount = items.length;
-  // console.log(itemCount);
 
   return (
     <>
@@ -18,6 +30,7 @@ function App() {
       <Form setItems={setItems} />
       <Packing items={items} setItems={setItems} />
       <Stats items={items} />
+      <Accordion data={faqs}/>
     </>
   );
 }
@@ -83,7 +96,7 @@ function Packing({ items, setItems }) {
           <Item key={item.id} item={item} setItems={setItems} /> // item Prop.
         ))}
       </ul>
-      <button onClick={()=>window.confirm("You shure?")? setItems([]): items }>Clear List</button>
+      <button disabled ={items.length === 0} onClick={()=>window.confirm("You shure?")? setItems([]): items }>Clear List</button>
     </div>
   );
 }
@@ -116,6 +129,7 @@ function Item({ item, setItems }) {
   );
 }
 function Stats({ items }) {
+
   const total = items.length;// drived state
   const packed = (items || []).filter((it) => it.packed).length;
   const percent = total ? Math.round((packed / total) * 100) : 0;
@@ -127,6 +141,38 @@ function Stats({ items }) {
       </em>
     </footer>
   );
+}
+function Accordion ({data}){
+  const [curOpen, setIsOpen]= useState(null)
+  return (
+    <>
+    <div className="accordion">
+      {
+        data.map((el,i)=>(
+          <AccordionItem curOpen={curOpen} onOpen={setIsOpen} key={i} title={el.title} text={el.text} num={i+1}/>  
+        ))
+      }
+    </div>
+    </>
+  )
+  function AccordionItem ({title,text,num,curOpen,onOpen}){
+    // const [isOpen, setIsOpen]= useState(false);
+    const isOpen = num === curOpen;
+
+    const handleToggle= () =>{
+      // setIsOpen(!isOpen)
+      onOpen(isOpen ? 'open': num)
+    }
+    return (
+      <div className={`item ${isOpen ? "open" : ""}`} onClick={handleToggle}>
+        <p className="number">{num < 9 ? `0${num + 1}` : num + 1}</p>
+        <p className="title">{title}</p>
+        <p className="icon">{isOpen? '-': '+'}</p>
+        { isOpen &&<p className="content-box">{text}</p>}
+      </div>
+    )
+  }
+
 }
 
 export default App;
